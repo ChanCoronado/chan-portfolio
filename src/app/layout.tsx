@@ -3,6 +3,7 @@ import { Anton, Geist, Geist_Mono } from "next/font/google";
 import ChatWidget from "@/components/ChatWidget";
 import ScrollProgress from "@/components/ScrollProgress";
 import "./globals.css";
+import { SITE_URL } from "@/lib/site";
 
 const display = Anton({
   weight: "400",
@@ -22,8 +23,6 @@ const mono = Geist_Mono({
   variable: "--f-mono",
   display: "swap",
 });
-
-const SITE_URL = "https://ichaan-github-io.vercel.app";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
