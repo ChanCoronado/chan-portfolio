@@ -1,0 +1,296 @@
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin-bottom: var(--space-5);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    background-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.chip span {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+}
+
+.chip:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+
+.chip[aria-pressed="true"] {
+  border-color: var(--accent);
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Collapsed: four cards on phones, six from tablets up */
+.grid[data-collapsed="true"] > li:nth-child(n + 5) {
+  display: none;
+}
+
+.more {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  margin-top: var(--space-5);
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  background: transparent;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  cursor: pointer;
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.more:hover,
+.more:focus-visible {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  width: 100%;
+  height: 100%;
+  padding: var(--space-3) var(--space-3) var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: inherit;
+  text-align: left;
+  font: inherit;
+  cursor: pointer;
+  transition:
+    border-color 0.3s var(--ease),
+    transform 0.4s var(--ease);
+}
+
+.card.plain {
+  cursor: default;
+}
+
+button.card:hover,
+button.card:focus-visible {
+  border-color: var(--accent);
+  transform: translateY(-0.25rem);
+}
+
+/* The whole certificate shows inside a fixed 4:3 frame, never cropped */
+.thumb {
+  display: block;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  background: #060807;
+}
+
+.thumb img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.noImage {
+  display: grid;
+  height: 100%;
+  place-items: center;
+  padding: var(--space-4);
+  text-align: center;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-1);
+  padding: 0 var(--space-2);
+}
+
+.when {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.issuer {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+.view {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--text);
+  transition: color 0.25s var(--ease);
+}
+
+button.card:hover .view,
+button.card:focus-visible .view {
+  color: var(--accent);
+}
+
+@media (min-width: 640px) {
+  .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid[data-collapsed="true"] > li:nth-child(n + 5) {
+    display: list-item;
+  }
+
+  .grid[data-collapsed="true"] > li:nth-child(n + 7) {
+    display: none;
+  }
+
+  /* With six or fewer cards, nothing is hidden from tablets up */
+  .phoneOnly {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .more {
+    transition: none;
+  }
+
+  button.card:hover,
+  button.card:focus-visible {
+    transform: none;
+  }
+}
+
+/* Dialog */
+.dialog {
+  width: min(92vw, 62rem);
+  max-height: 92svh;
+  margin: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  color: var(--text);
+  overflow: auto;
+}
+
+.dialog::backdrop {
+  background: rgba(5, 7, 6, 0.82);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.figure {
+  margin: 0;
+  display: grid;
+  gap: var(--space-3);
+}
+
+.figure img {
+  width: 100%;
+  max-height: 78svh;
+  object-fit: contain;
+  border-radius: 0.5rem;
+  background: #fff;
+}
+
+.figure figcaption {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+.close {
+  display: block;
+  margin: var(--space-4) 0 0 auto;
+  min-height: 2.75rem;
+  padding: 0 var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: none;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.close:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+button.card:active {
+  transform: scale(0.98);
+}
+
+.chip:active,
+.more:active {
+  transform: scale(0.96);
+}
+
+/* Phones: two small cards across, so the wall stays short */
+@media (max-width: 599px) {
+  .card {
+    gap: var(--space-3);
+    padding: var(--space-2) var(--space-2) var(--space-3);
+  }
+
+  .body {
+    padding: 0 var(--space-1);
+  }
+
+  .title {
+    font-size: var(--text-sm);
+  }
+
+  .issuer,
+  .view {
+    font-size: var(--text-xs);
+  }
+}

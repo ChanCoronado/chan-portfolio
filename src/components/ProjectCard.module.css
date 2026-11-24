@@ -1,0 +1,145 @@
+.card {
+  display: grid;
+  align-content: start;
+  gap: var(--space-4);
+  height: 100%;
+  color: inherit;
+}
+
+/* The laptop: bezel, screen and a base, like the hover preview on the home page */
+.shot {
+  display: block;
+  padding-bottom: 0.7rem;
+}
+
+.laptop {
+  position: relative;
+  display: block;
+  padding: 0.4rem 0.4rem 0.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.7rem 0.7rem 0.25rem 0.25rem;
+  background: #060807;
+  transition:
+    border-color 0.3s var(--ease),
+    transform 0.4s var(--ease);
+}
+
+.laptop::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -4%;
+  width: 108%;
+  height: 0.55rem;
+  border: 1px solid var(--line-strong);
+  border-top: 0;
+  border-radius: 0 0 0.8rem 0.8rem;
+  background: linear-gradient(#1a1f1b, #0d100e);
+}
+
+/* The whole screenshot shows inside a fixed 16:10 screen, never cropped */
+.laptop img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  border-radius: 0.3rem;
+}
+
+.blank {
+  display: grid;
+  aspect-ratio: 16 / 10;
+  place-items: center;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.card:hover .laptop,
+.card:focus-visible .laptop {
+  border-color: var(--accent);
+  transform: translateY(-0.25rem);
+}
+
+.body {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+}
+
+.kind {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.name {
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.stack {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+.note {
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--text-dim);
+}
+
+.cta {
+  margin-top: var(--space-2);
+  font-size: var(--text-sm);
+  transition: color 0.25s var(--ease);
+}
+
+.card:hover .cta,
+.card:focus-visible .cta {
+  color: var(--accent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .laptop {
+    transition: none;
+  }
+
+  .card:hover .laptop,
+  .card:focus-visible .laptop {
+    transform: none;
+  }
+}
+
+.card:active .laptop {
+  transform: scale(0.985);
+}
+
+/* Phones: two cards across, so the type inside is smaller */
+@media (max-width: 599px) {
+  .card {
+    gap: var(--space-3);
+  }
+
+  .name {
+    font-size: var(--text-md);
+  }
+
+  .stack {
+    font-size: var(--text-xs);
+  }
+
+  .body {
+    gap: var(--space-1);
+  }
+
+  .laptop {
+    padding: 0.25rem 0.25rem 0.3rem;
+  }
+}

@@ -1,0 +1,15 @@
+.reveal {
+  transition:
+    opacity 0.9s var(--ease) var(--d, 0ms),
+    transform 0.9s var(--ease) var(--d, 0ms);
+}
+
+.reveal[data-state="pre"] {
+  opacity: 0;
+  transform: translateY(1.75rem);
+}
+
+.reveal[data-state="in"] {
+  opacity: 1;
+  transform: none;
+}
