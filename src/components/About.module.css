@@ -1,0 +1,320 @@
+.section {
+  padding: var(--section-y) var(--gutter);
+  scroll-margin-top: var(--nav-h);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.intro {
+  display: grid;
+  gap: var(--space-6);
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line-strong);
+}
+
+.portrait {
+  position: relative;
+  margin: 0;
+  width: min(80vw, 24rem);
+}
+
+.portrait img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  border-radius: 1rem;
+  border: 1px solid var(--line-strong);
+}
+
+.portrait figcaption {
+  margin-top: var(--space-3);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.story {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 40rem;
+  align-content: start;
+  color: var(--text-dim);
+}
+
+.story p {
+  font-size: var(--text-md);
+}
+
+.story .lead {
+  font-size: var(--text-lg);
+  line-height: 1.5;
+  color: var(--text);
+}
+
+.story em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.looking {
+  margin-top: var(--space-4);
+  padding: var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+}
+
+.looking h3 {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.looking p {
+  font-size: var(--text-base);
+  color: var(--text);
+}
+
+.aiNote {
+  padding-left: var(--space-4);
+  border-left: 2px solid var(--line-strong);
+}
+
+.aiNote h3 {
+  margin-bottom: var(--space-2);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.aiNote p {
+  font-size: var(--text-base);
+}
+
+.block {
+  margin-top: var(--space-7);
+}
+
+.blockTitle {
+  margin-bottom: var(--space-4);
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--line-strong);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(1.75rem, 1.2rem + 1.6vw, 2.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+/* Education */
+.schools {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.school {
+  display: grid;
+  grid-template-columns: 4.5rem minmax(0, 1fr);
+  gap: var(--space-4);
+  align-items: start;
+  padding: var(--space-5) 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.logo {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: contain;
+}
+
+.school:first-child .logo {
+  width: 4.5rem;
+}
+
+.period {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.schoolName {
+  margin-top: var(--space-1);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.25;
+}
+
+.detail {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: var(--space-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.badges li {
+  padding: 0.2rem 0.7rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+}
+
+/* Highlights */
+.highlights {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hCard {
+  display: grid;
+  align-content: start;
+  gap: var(--space-2);
+  padding: var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+}
+
+.num {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+.hYear {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 1.2rem + 2.4vw, 3.25rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--text);
+}
+
+.hTitle {
+  font-size: var(--text-md);
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.hNote {
+  font-size: var(--text-sm);
+  color: var(--text-dim);
+}
+
+@media (min-width: 900px) {
+  .intro {
+    grid-template-columns: 24rem minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .school {
+    grid-template-columns: 5.5rem minmax(0, 1fr);
+    gap: var(--space-5);
+  }
+
+  .logo {
+    width: 5.5rem;
+    height: 5.5rem;
+  }
+
+  .highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .portrait {
+    width: min(58vw, 15rem);
+  }
+
+  .school {
+    grid-template-columns: 3.25rem minmax(0, 1fr);
+    gap: var(--space-3);
+    padding: var(--space-4) 0;
+  }
+
+  .logo,
+  .school:first-child .logo {
+    width: 3.25rem;
+    height: 3.25rem;
+  }
+
+  .blockTitle {
+    font-size: 1.5rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .hCard {
+    padding: var(--space-4);
+  }
+
+  .hYear {
+    font-size: 1.75rem;
+  }
+}
+
+/* Phones: highlights sit two across, with smaller type */
+@media (max-width: 599px) {
+  .highlights {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: var(--space-3);
+  }
+
+  .hCard {
+    padding: var(--space-3);
+  }
+
+  .hYear {
+    font-size: 1.5rem;
+  }
+
+  .hTitle {
+    font-size: var(--text-sm);
+  }
+
+  .hNote {
+    font-size: var(--text-xs);
+    line-height: 1.45;
+  }
+}
+
+/* Phones and tablets: the portrait and its caption sit in the middle of the column */
+@media (max-width: 899px) {
+  .portrait {
+    margin-inline: auto;
+  }
+
+  .portrait figcaption {
+    text-align: center;
+  }
+}
