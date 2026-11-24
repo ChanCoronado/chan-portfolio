@@ -1,0 +1,358 @@
+.page {
+  display: grid;
+  align-items: center;
+  min-height: calc(100svh - var(--nav-h));
+  padding: var(--space-7) var(--gutter) var(--space-8);
+  overflow-x: clip;
+}
+
+.inner {
+  display: grid;
+  gap: var(--space-6);
+  width: 100%;
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+/* The big 404 sits behind the portrait, like the name on the home page */
+.stage {
+  position: relative;
+  display: grid;
+  justify-items: center;
+}
+
+.code,
+.portrait {
+  grid-area: 1 / 1;
+}
+
+.code {
+  position: relative;
+  align-self: start;
+  font-family: var(--font-display);
+  font-size: clamp(7rem, 1rem + 36vw, 25rem);
+  line-height: 0.85;
+  letter-spacing: 0.01em;
+  color: var(--text);
+  white-space: nowrap;
+}
+
+.code span {
+  color: var(--accent);
+  animation: flicker 1.2s steps(1) 1.6s 1;
+}
+
+/* faint screen lines across the numbers */
+.code::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(11, 14, 12, 0.28) 0 2px,
+    transparent 2px 5px
+  );
+  pointer-events: none;
+}
+
+.portrait {
+  position: relative;
+  z-index: 2;
+  align-self: end;
+  width: clamp(9rem, 38vw, 18rem);
+  margin: calc(var(--space-6) * 1) 0 0;
+  /* the photo is cropped at the waist, so it fades into the page */
+  -webkit-mask-image: linear-gradient(#000 78%, transparent);
+  mask-image: linear-gradient(#000 78%, transparent);
+}
+
+.portrait img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.bubble {
+  position: absolute;
+  z-index: 3;
+  top: 2%;
+  right: 0;
+  max-width: 7rem;
+  padding: 0.5rem 0.8rem;
+  border: 1px solid var(--accent);
+  border-radius: 0.9rem;
+  background: var(--bg-raised);
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  color: var(--text);
+  animation: pop 0.5s var(--ease) 1.2s both;
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  left: -0.4rem;
+  bottom: 0.7rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-bottom: 1px solid var(--accent);
+  border-left: 1px solid var(--accent);
+  background: var(--bg-raised);
+  transform: rotate(45deg);
+}
+
+.copy {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: start;
+}
+
+.kicker {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.terminal {
+  position: relative;
+  width: min(100%, 26rem);
+  padding: 2.4rem var(--space-5) var(--space-5);
+  border: 1px solid var(--line-strong);
+  border-radius: 0.7rem;
+  background: #060807;
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  line-height: 1.7;
+}
+
+.dots {
+  position: absolute;
+  top: 0.8rem;
+  left: var(--space-5);
+  display: flex;
+  gap: 0.35rem;
+}
+
+.dots i {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
+/* each line types itself out, one after another */
+.line {
+  width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  color: var(--text-dim);
+  animation-name: type;
+  animation-timing-function: steps(var(--n));
+  animation-fill-mode: both;
+}
+
+.l1 {
+  --n: 10;
+  color: var(--text);
+  animation-duration: 0.6s;
+  animation-delay: 0.4s;
+}
+
+.l2 {
+  --n: 16;
+  color: var(--accent);
+  animation-duration: 0.8s;
+  animation-delay: 1.2s;
+}
+
+.l3 {
+  --n: 25;
+  color: var(--accent);
+  animation-duration: 1s;
+  animation-delay: 2s;
+}
+
+.l4 {
+  --n: 2;
+  color: var(--text);
+  animation-duration: 0.2s;
+  animation-delay: 3.1s;
+}
+
+.cursor {
+  display: inline-block;
+  width: 0.55em;
+  height: 1em;
+  margin-left: 0.1em;
+  vertical-align: text-bottom;
+  background: var(--accent);
+  animation: blink 1s steps(1) infinite;
+}
+
+.text {
+  max-width: 34rem;
+  font-size: var(--text-md);
+  color: var(--text-dim);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 2.75rem;
+  padding: 0.6rem 1.4rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  font-size: var(--text-sm);
+  transition:
+    background-color 0.3s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.primary {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  background: transparent;
+  color: var(--accent);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--accent);
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+@keyframes type {
+  to {
+    width: calc(var(--n) * 1ch + 0.2ch);
+  }
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(0.4rem) scale(0.92);
+  }
+}
+
+@keyframes flicker {
+  0%,
+  20%,
+  40%,
+  100% {
+    opacity: 1;
+  }
+
+  10%,
+  30% {
+    opacity: 0.25;
+  }
+}
+
+@media (max-width: 480px) {
+  .actions a {
+    flex: 1 1 100%;
+    justify-content: center;
+  }
+}
+
+@media (min-width: 640px) {
+  .bubble {
+    top: 6%;
+    right: auto;
+    left: calc(50% + 6.5rem);
+    max-width: 11rem;
+  }
+}
+
+@media (min-width: 900px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-8);
+  }
+
+  .code {
+    font-size: clamp(9rem, 2rem + 24vw, 24rem);
+  }
+
+  .portrait {
+    width: clamp(12rem, 20vw, 19rem);
+  }
+
+  .bubble {
+    left: calc(50% + 8rem);
+  }
+}
+
+@media (orientation: landscape) and (max-height: 520px) and (max-width: 899px) {
+  .inner {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: var(--space-5);
+  }
+
+  .page {
+    padding-block: var(--space-5);
+  }
+
+  .code {
+    font-size: clamp(5rem, 30vh, 9rem);
+  }
+
+  .portrait {
+    width: clamp(6rem, 26vh, 9rem);
+  }
+
+  .bubble {
+    display: none;
+  }
+
+  .terminal {
+    padding-top: 2rem;
+  }
+}
+
+/* Motion off: everything is simply there */
+@media (prefers-reduced-motion: reduce) {
+  .line {
+    width: auto;
+    animation: none;
+  }
+
+  .cursor,
+  .code span,
+  .bubble {
+    animation: none;
+  }
+
+  .primary,
+  .secondary {
+    transition: none;
+  }
+}
