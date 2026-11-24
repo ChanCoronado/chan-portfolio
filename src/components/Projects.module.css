@@ -1,0 +1,396 @@
+.section {
+  padding: var(--section-y) var(--gutter);
+  scroll-margin-top: var(--nav-h);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line-strong);
+}
+
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 3rem minmax(0, 1fr) 3rem;
+  gap: var(--space-4) var(--space-5);
+  padding: var(--space-6) 0;
+  border-bottom: 1px solid var(--line-strong);
+  transition: background-color 0.4s var(--ease);
+}
+
+.row::before {
+  content: "";
+  position: absolute;
+  inset: 0 calc(var(--gutter) * -0.5);
+  z-index: -1;
+  background: var(--bg-raised);
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+
+.row:hover::before,
+.row:focus-visible::before,
+.row:active::before {
+  opacity: 1;
+}
+
+.index {
+  padding-top: 0.6rem;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+
+.main {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(2.5rem, 1.3rem + 5vw, 5.5rem);
+  line-height: 0.95;
+  text-transform: uppercase;
+  transition:
+    transform 0.5s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.row:hover .name {
+  transform: translateX(0.6rem);
+  color: var(--accent);
+}
+
+.sub {
+  font-family: var(--font-label);
+  font-size: var(--text-sm);
+  letter-spacing: 0.03em;
+  color: var(--text);
+}
+
+.summary {
+  max-width: 38rem;
+  color: var(--text-dim);
+}
+
+.meta {
+  grid-column: 2;
+  display: grid;
+  gap: var(--space-3);
+  margin: 0;
+}
+
+.meta div {
+  display: grid;
+  gap: 2px;
+}
+
+.meta dt {
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.meta dd {
+  margin: 0;
+  font-size: var(--text-sm);
+}
+
+.arrow {
+  grid-column: 3;
+  grid-row: 1;
+  align-self: start;
+  justify-self: end;
+  font-size: 1.75rem;
+  line-height: 1;
+  color: var(--text-dim);
+  transition:
+    transform 0.4s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.row:hover .arrow {
+  transform: translate(0.25rem, -0.25rem);
+  color: var(--accent);
+}
+
+/* Phones: the number and arrow share the top line, so the text can use the full width */
+@media (max-width: 599px) {
+  .row {
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: var(--space-3) var(--space-4);
+    padding: var(--space-5) 0;
+  }
+
+  .index {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: center;
+    padding-top: 0;
+  }
+
+  .arrow {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: center;
+    font-size: 1.5rem;
+  }
+
+  .main,
+  .meta,
+  .preview {
+    grid-column: 1 / -1;
+  }
+
+  .main {
+    grid-row: 2;
+  }
+}
+
+/* Screenshot preview: a laptop with a phone beside it. A thumbnail on phones, a hover card on desktop */
+.preview {
+  position: relative;
+  grid-column: 2;
+  display: block;
+  padding-bottom: 1.2rem;
+}
+
+.laptop {
+  position: relative;
+  display: block;
+  padding: 0.4rem 0.4rem 0.5rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.7rem 0.7rem 0.25rem 0.25rem;
+  background: #060807;
+}
+
+/* The base of the laptop */
+.laptop::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: -4%;
+  width: 108%;
+  height: 0.55rem;
+  border: 1px solid var(--line-strong);
+  border-top: 0;
+  border-radius: 0 0 0.8rem 0.8rem;
+  background: linear-gradient(#1a1f1b, #0d100e);
+}
+
+.laptop img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: contain;
+  border-radius: 0.3rem;
+}
+
+.handset {
+  position: absolute;
+  right: -0.9rem;
+  bottom: 0;
+  width: 24%;
+  padding: 0.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 1rem;
+  background: #060807;
+  box-shadow: 0 0.8rem 1.6rem rgba(0, 0, 0, 0.55);
+}
+
+/* The notch */
+.handset::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: 50%;
+  z-index: 1;
+  width: 28%;
+  height: 0.28rem;
+  border-radius: 1rem;
+  background: #060807;
+  transform: translateX(-50%);
+}
+
+.handset img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+}
+
+@media (min-width: 900px) {
+  .row {
+    grid-template-columns: 4rem minmax(0, 1.5fr) minmax(0, 1fr) 3rem;
+    align-items: start;
+  }
+
+  .preview {
+    position: absolute;
+    top: 50%;
+    right: 5rem;
+    z-index: 3;
+    width: 24rem;
+    opacity: 0;
+    transform: translateY(-45%) rotate(-2deg) scale(0.96);
+    pointer-events: none;
+    filter: drop-shadow(0 1.5rem 2rem rgba(0, 0, 0, 0.45));
+    transition:
+      opacity 0.35s var(--ease),
+      transform 0.45s var(--ease);
+  }
+
+  .row:hover .preview,
+  .row:focus-visible .preview {
+    opacity: 1;
+    transform: translateY(-50%) rotate(-2deg) scale(1);
+  }
+
+  .meta {
+    grid-column: 3;
+    padding-top: 0.5rem;
+    transition: opacity 0.3s var(--ease);
+  }
+
+  /* The preview takes the details' place, so it never sits on top of text */
+  .row:has(.preview):hover .meta,
+  .row:has(.preview):focus-visible .meta {
+    opacity: 0;
+  }
+
+  .arrow {
+    grid-column: 4;
+  }
+}
+
+/* The last row of the list: leads to every project. Same look as the rows above */
+.moreRow .name {
+  font-size: clamp(2rem, 1rem + 4vw, 4rem);
+}
+
+.moreCta {
+  margin-top: var(--space-2);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Three screenshots fanned out, shown on hover where there is a pointer */
+.fan {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .fan {
+    position: absolute;
+    top: 50%;
+    right: 5rem;
+    z-index: 3;
+    display: block;
+    width: 21rem;
+    height: 9rem;
+    opacity: 0;
+    transform: translateY(-50%);
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease);
+  }
+
+  .fanCard {
+    position: absolute;
+    top: 0;
+    width: 11rem;
+    padding: 0.25rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 0.6rem;
+    background: #060807;
+    box-shadow: 0 1rem 1.6rem rgba(0, 0, 0, 0.5);
+    transform: translateY(0.75rem) rotate(0deg);
+    transition: transform 0.5s var(--ease);
+  }
+
+  .fanCard img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    border-radius: 0.35rem;
+  }
+
+  .fanCard:nth-child(1) {
+    left: 0;
+  }
+
+  .fanCard:nth-child(2) {
+    left: 5rem;
+  }
+
+  .fanCard:nth-child(3) {
+    left: 10rem;
+  }
+
+  .moreRow:hover .fan,
+  .moreRow:focus-visible .fan {
+    opacity: 1;
+  }
+
+  .moreRow:hover .fanCard:nth-child(1),
+  .moreRow:focus-visible .fanCard:nth-child(1) {
+    transform: translateY(0) rotate(-5deg);
+  }
+
+  .moreRow:hover .fanCard:nth-child(2),
+  .moreRow:focus-visible .fanCard:nth-child(2) {
+    transform: translateY(-0.4rem) rotate(0deg);
+  }
+
+  .moreRow:hover .fanCard:nth-child(3),
+  .moreRow:focus-visible .fanCard:nth-child(3) {
+    transform: translateY(0) rotate(5deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fan,
+  .fanCard {
+    transition: none;
+  }
+}
+
+@media (max-width: 599px) {
+  .name {
+    font-size: clamp(1.9rem, 0.8rem + 4.6vw, 2.5rem);
+  }
+
+  .moreRow .name {
+    font-size: 1.75rem;
+  }
+
+  .meta {
+    gap: 0.4rem;
+  }
+
+  .meta div {
+    grid-template-columns: 3.75rem minmax(0, 1fr);
+    align-items: baseline;
+    gap: var(--space-3);
+  }
+
+  .preview {
+    max-width: 17rem;
+  }
+}
