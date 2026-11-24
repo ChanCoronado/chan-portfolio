@@ -1,0 +1,239 @@
+.section {
+  padding: var(--section-y) var(--gutter)
+    max(var(--space-6), env(safe-area-inset-bottom));
+  scroll-margin-top: var(--nav-h);
+}
+
+.inner {
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+.label span {
+  color: var(--accent);
+}
+
+.label::after {
+  content: "";
+  flex: 1;
+  max-width: 6rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(4rem, 2rem + 14vw, 14rem);
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+
+.title span {
+  color: var(--accent);
+}
+
+.body {
+  display: grid;
+  gap: var(--space-6);
+  margin-top: var(--space-6);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line-strong);
+}
+
+.lead {
+  max-width: 34rem;
+  font-size: var(--text-md);
+  color: var(--text-dim);
+}
+
+/* Email */
+.email {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.address {
+  display: inline-block;
+  min-height: 2.75rem;
+  padding: 0.7rem 0;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+  font-size: clamp(1.05rem, 0.55rem + 2.6vw, 2.25rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  border-bottom: 1px solid var(--accent);
+  transition: color 0.25s var(--ease);
+}
+
+a.address:hover {
+  color: var(--accent);
+}
+
+.noscript {
+  font-size: var(--text-md);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.primary,
+.secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.25rem;
+  padding: 0 var(--space-6);
+  border-radius: 999px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    transform 0.3s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.primary {
+  background: var(--accent);
+  border: 1px solid var(--accent);
+  color: var(--accent-ink);
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+}
+
+.secondary {
+  background: none;
+  border: 1px solid var(--line-strong);
+}
+
+.secondary:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.secondary:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+/* Links */
+.links {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+
+.links li {
+  border-bottom: 1px solid var(--line);
+}
+
+.links a {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: var(--space-1) var(--space-4);
+  min-height: 3.5rem;
+  padding: var(--space-4) 0;
+  transition: color 0.25s var(--ease);
+}
+
+.links a:hover {
+  color: var(--accent);
+}
+
+.linkLabel {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 1.1rem + 1.6vw, 2.5rem);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+
+.linkDetail {
+  grid-column: 1;
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+}
+
+.arrow {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  align-self: center;
+  font-size: 1.5rem;
+  color: var(--text-dim);
+  transition:
+    transform 0.4s var(--ease),
+    color 0.3s var(--ease);
+}
+
+.links a:hover .arrow {
+  transform: translate(0.25rem, -0.25rem);
+  color: var(--accent);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  margin-top: var(--space-7);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+  font-family: var(--font-label);
+  font-size: var(--text-xs);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-dim);
+}
+
+@media (min-width: 900px) {
+  .body {
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: var(--space-8);
+    align-items: start;
+  }
+
+  .lead {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 599px) {
+  .title {
+    font-size: clamp(2.75rem, 1.2rem + 9vw, 4rem);
+  }
+
+  .linkLabel {
+    font-size: 1.35rem;
+  }
+
+  .links a {
+    min-height: 3rem;
+    padding: var(--space-3) 0;
+  }
+
+  .address {
+    font-size: clamp(0.95rem, 0.4rem + 2.8vw, 1.25rem);
+  }
+}
