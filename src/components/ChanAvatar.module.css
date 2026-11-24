@@ -1,0 +1,84 @@
+.avatar {
+  position: relative;
+  display: block;
+  aspect-ratio: 353 / 350;
+}
+
+.launcher {
+  width: 100%;
+}
+
+.small {
+  width: 2.5rem;
+}
+
+.avatar img,
+.avatar svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.avatar img {
+  object-fit: contain;
+}
+
+/* Layers from back to front: waving hand, body, salute hand.
+   The waving hand sits behind the body so the sleeve covers its base. */
+.wave {
+  opacity: 0;
+  overflow: visible;
+  /* the wrist, about 16% across and 52% down */
+  transform-origin: 16.4% 52.3%;
+}
+
+.hand {
+  transform-origin: 17% 52%;
+}
+
+.avatar[data-waving="true"] .wave {
+  opacity: 1;
+  animation: hi 1.8s ease-in-out;
+}
+
+.avatar[data-waving="true"] .hand {
+  opacity: 0;
+}
+
+/* A friendly side-to-side wave around the wrist */
+@keyframes hi {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  14% {
+    transform: rotate(-14deg);
+  }
+  30% {
+    transform: rotate(12deg);
+  }
+  46% {
+    transform: rotate(-14deg);
+  }
+  62% {
+    transform: rotate(12deg);
+  }
+  78% {
+    transform: rotate(-10deg);
+  }
+  90% {
+    transform: rotate(4deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .avatar[data-waving="true"] .wave {
+    opacity: 0;
+    animation: none;
+  }
+
+  .avatar[data-waving="true"] .hand {
+    opacity: 1;
+  }
+}

@@ -1,0 +1,362 @@
+.root {
+  position: fixed;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: var(--chat-bottom, max(1rem, env(safe-area-inset-bottom)));
+  z-index: 66;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-3);
+  pointer-events: none;
+}
+
+.root > * {
+  pointer-events: auto;
+}
+
+/* Launcher: the avatar in a small tile, with a speech bubble beside it */
+.dock {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.launcher {
+  position: relative;
+  width: 4.75rem;
+  height: 4.75rem;
+  padding: 0.3rem;
+  border: 1px solid rgba(181, 201, 154, 0.55);
+  border-radius: 1.25rem;
+  background: var(--bg-raised);
+  box-shadow: 0 0.75rem 2rem rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition:
+    transform 0.35s var(--ease),
+    border-color 0.25s var(--ease);
+}
+
+.launcher:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+}
+
+.online {
+  position: absolute;
+  top: -0.2rem;
+  right: -0.2rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border: 2px solid var(--bg);
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+.bubble {
+  position: relative;
+  max-width: 14rem;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: var(--bg-raised);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.4);
+  animation: pop 0.45s var(--ease);
+}
+
+.bubble::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: -0.4rem;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-top: 1px solid var(--line-strong);
+  border-right: 1px solid var(--line-strong);
+  background: var(--bg-raised);
+  transform: translateY(-50%) rotate(45deg);
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateX(0.75rem) scale(0.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Panel */
+.panel {
+  display: flex;
+  flex-direction: column;
+  width: min(24rem, calc(100vw - 2rem));
+  height: min(
+    34rem,
+    calc(100svh - var(--nav-h) - 8.5rem - var(--tabbar-offset, 0px))
+  );
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 1.25rem;
+  background: var(--bg-raised);
+  box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.6);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(1rem) scale(0.97);
+  transform-origin: bottom right;
+  transition:
+    opacity 0.3s var(--ease),
+    transform 0.4s var(--ease),
+    visibility 0s linear 0.4s;
+}
+
+.panel[data-open="true"] {
+  opacity: 1;
+  visibility: visible;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.head {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) var(--space-4);
+  border-bottom: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.headText {
+  flex: 1;
+  min-width: 0;
+}
+
+.headText h2 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.headText p {
+  font-size: var(--text-xs);
+  color: var(--text-dim);
+}
+
+.close {
+  display: grid;
+  place-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: none;
+  font-size: 1.75rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: background-color 0.25s var(--ease);
+}
+
+.close:hover {
+  background: var(--line);
+}
+
+.log {
+  display: grid;
+  gap: var(--space-3);
+  align-content: start;
+  flex: 1;
+  padding: var(--space-4);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+
+.user,
+.bot,
+.soon {
+  max-width: 88%;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  line-height: 1.55;
+}
+
+.user {
+  justify-self: end;
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+.bot,
+.soon {
+  justify-self: start;
+  border: 1px solid var(--line-strong);
+  background: var(--surface);
+}
+
+.soon {
+  max-width: 100%;
+}
+
+.soon a {
+  display: inline-block;
+  padding: 0.6rem 0;
+  color: var(--accent);
+  border-bottom: 1px solid var(--accent);
+}
+
+.error {
+  font-size: var(--text-sm);
+  color: #e8a598;
+}
+
+.dots {
+  display: inline-flex;
+  gap: 0.3rem;
+}
+
+.dots i {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--text-dim);
+  animation: blink 1.2s infinite;
+}
+
+.dots i:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.dots i:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes blink {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+  }
+  40% {
+    opacity: 1;
+  }
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0 var(--space-4) var(--space-3);
+  list-style: none;
+}
+
+.chips button {
+  min-height: 2.75rem;
+  padding: 0 var(--space-3);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: none;
+  font-size: var(--text-xs);
+  text-align: left;
+  cursor: pointer;
+  transition:
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+
+.chips button:hover:not(:disabled) {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.form {
+  display: flex;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.form input {
+  flex: 1;
+  min-width: 0;
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: var(--bg);
+  /* 16px so iOS does not zoom in when the field is focused */
+  font-size: 16px;
+  color: var(--text);
+}
+
+.form input::placeholder {
+  color: var(--text-dim);
+}
+
+.form input:disabled {
+  cursor: not-allowed;
+}
+
+.form button {
+  min-height: 2.75rem;
+  padding: 0 var(--space-4);
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .panel {
+    width: calc(100vw - 2rem);
+    height: min(
+      34rem,
+      calc(100svh - var(--nav-h) - 8.5rem - var(--tabbar-offset, 0px))
+    );
+  }
+
+  .bubble {
+    max-width: 11rem;
+  }
+}
+
+/* Phones on their side: a smaller launcher and a panel that uses the whole height */
+@media (orientation: landscape) and (max-height: 520px) {
+  .launcher {
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 1rem;
+  }
+
+  .panel {
+    height: calc(100svh - var(--nav-h) - 5.6rem - var(--tabbar-offset, 0px));
+  }
+
+  .bubble {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .panel,
+  .bubble {
+    transition: none;
+    animation: none;
+  }
+}
